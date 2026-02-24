@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="login_bg_start">#1A237E</color>
+    <color name="login_bg_end">#1E88E5</color>
+    <color name="login_button">#1A237E</color>
+    <color name="text_primary">#333333</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#9E9E9E</color>
+    <color name="tab_bg_selected">#FFFFFF</color>
+    <color name="tab_bg_unselected">#F5F5F5</color>
+    <color name="tab_text_selected">#1A237E</color>
+    <color name="tab_text_unselected">#757575</color>
+    
+    <!-- Home Page Colors -->
+    <color name="home_header_bg">#1A237E</color>
+    <color name="card_bg">#FFFFFF</color>
+    <color name="report_button_bg">#F5F5F5</color>
+    <color name="report_text">#1A237E</color>
+    <color name="status_pending_bg">#EEEEEE</color>
+    <color name="status_pending_text">#616161</color>
+    <color name="status_inprogress_bg">#FFF8E1</color>
+    <color name="status_inprogress_text">#F57C00</color>
+    <color name="status_resolved_bg">#E8F5E9</color>
+    <color name="status_resolved_text">#388E3C</color>
+    <color name="nav_icon_selected">#1A237E</color>
+    <color name="nav_icon_unselected">#9E9E9E</color>
+</resources>

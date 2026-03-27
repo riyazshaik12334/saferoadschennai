@@ -66,6 +66,7 @@
                 
              <!-- Notification Dots usually added programmatically or separate view -->
             <View
+                 android:id="@+id/notifDot"
                  android:layout_width="8dp"
                  android:layout_height="8dp"
                  android:background="@drawable/bg_sheet_rounded_top" 
@@ -128,6 +129,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/tvTotalCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -157,6 +159,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/tvActiveCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -185,6 +188,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/tvFixedCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -263,7 +267,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Recent Reports Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -281,6 +284,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/btnViewAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View All"
@@ -288,8 +292,30 @@
                     android:textStyle="bold"
                     android:drawableEnd="@drawable/ic_list"
                     android:drawableTint="@color/login_button" 
-                    android:drawablePadding="4dp"/> <!-- Reusing list icon as arrow placeholder if needed or just text -->
+                    android:drawablePadding="4dp"
+                    android:clickable="true"
+                    android:focusable="true"/> 
             </LinearLayout>
+
+            <!-- New RecyclerView for Recent Reports -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecentReports"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_my_report" />
+
+            <!-- Empty State for Recent Reports -->
+            <TextView
+                android:id="@+id/tvEmptyRecent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:text="No recent reports yet."
+                android:textColor="@color/text_secondary"
+                android:visibility="gone" />
 
 
 

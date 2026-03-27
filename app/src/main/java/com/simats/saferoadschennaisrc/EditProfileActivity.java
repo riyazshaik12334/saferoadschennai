@@ -8,10 +8,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.simats.saferoadschennaisrc.network.ApiService;
+import com.simats.saferoadschennaisrc.network.RetrofitClient;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    private EditText etFullName, etEmail, etAddress;
+    private EditText etFullName, etEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +23,6 @@ public class EditProfileActivity extends AppCompatActivity {
         // Bind Views
         etFullName = findViewById(R.id.etFullName);
         etEmail = findViewById(R.id.etEmail);
-        etAddress = findViewById(R.id.etAddress);
 
         // Header Back Button
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
@@ -43,67 +44,65 @@ public class EditProfileActivity extends AppCompatActivity {
         }
         etFullName.setText(name);
 
-        String address = prefs.getString("USER_ADDRESS", "");
-        if (!address.isEmpty()) {
-            etAddress.setText(address);
-        }
-
-        // Mock Map Pick Logic
-        View.OnClickListener mapPickListener = v -> {
-            etAddress.setText("123, Gandhi Rd, Chennai - Map Picked");
-            Toast.makeText(this, "Location picked from Map", Toast.LENGTH_SHORT).show();
-        };
-
-        etAddress.setOnClickListener(mapPickListener);
-
         ImageView imgProfile = findViewById(R.id.imgProfile);
 
-        // Avatar Selection Logic
-        View.OnClickListener avatarListener = v -> {
-            // Reset all avatars
-            findViewById(R.id.avatarPerson).setBackgroundResource(R.drawable.bg_circle_white);
-            findViewById(R.id.avatarSecurity).setBackgroundResource(R.drawable.bg_circle_white);
-            findViewById(R.id.avatarHelp).setBackgroundResource(R.drawable.bg_circle_white);
-            findViewById(R.id.avatarNotifications).setBackgroundResource(R.drawable.bg_circle_white);
-            findViewById(R.id.avatarInfo).setBackgroundResource(R.drawable.bg_circle_white);
-
-            // Highlight selected
-            v.setBackgroundResource(R.drawable.bg_tab_selected); // Using existing white but could use a light tint
-
-            // Update main profile pic
-            if (v instanceof ImageView) {
-                imgProfile.setImageDrawable(((ImageView) v).getDrawable());
-                imgProfile.setColorFilter(((ImageView) v).getColorFilter());
-            }
-        };
-
-        findViewById(R.id.avatarPerson).setOnClickListener(avatarListener);
-        findViewById(R.id.avatarSecurity).setOnClickListener(avatarListener);
-        findViewById(R.id.avatarHelp).setOnClickListener(avatarListener);
-        findViewById(R.id.avatarNotifications).setOnClickListener(avatarListener);
-        findViewById(R.id.avatarInfo).setOnClickListener(avatarListener);
-
-        // Save Changes
-        findViewById(R.id.btnSaveChanges).setOnClickListener(v -> {
-            String newName = etFullName.getText().toString();
-            String newEmail = etEmail.getText().toString();
-            String newAddress = etAddress.getText().toString();
-
-            // Save to Prefs
-            prefs.edit()
-                    .putString("USER_NAME", newName)
-                    .putString("USER_EMAIL", newEmail)
-                    .putString("USER_ADDRESS", newAddress)
-                    .apply();
-
-            Toast.makeText(this, "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
-            finish();
-        });
+        findViewById(R.id.btnSaveChanges).setOnClickListener(v -> saveProfileChanges());
 
         // Cancel
         findViewById(R.id.btnCancel).setOnClickListener(v -> finish());
 
         setupBottomNavigation();
+    }
+
+    private void saveProfileChanges() {
+        String newName = etFullName.getText().toString().trim();
+        if (newName.isEmpty()) {
+            Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
+        String email = prefs.getString("USER_EMAIL", "");
+
+        android.widget.Button btnSaveChanges = findViewById(R.id.btnSaveChanges);
+        btnSaveChanges.setEnabled(false);
+        btnSaveChanges.setText("SAVING...");
+
+        ApiService.ProfileUpdateRequest request = new ApiService.ProfileUpdateRequest(email, newName);
+        RetrofitClient.getApiService().updateProfile(request).enqueue(new retrofit2.Callback<ApiService.AuthResponse>() {
+            @Override
+            public void onResponse(retrofit2.Call<ApiService.AuthResponse> call, retrofit2.Response<ApiService.AuthResponse> response) {
+                btnSaveChanges.setEnabled(true);
+                btnSaveChanges.setText("SAVE CHANGES");
+
+                if (response.isSuccessful() && response.body() != null) {
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("USER_NAME", response.body().name);
+                    editor.apply();
+
+                    Toast.makeText(EditProfileActivity.this, "Profile updated successfully!", Toast.LENGTH_SHORT).show();
+                    finish(); // Go back after success
+                } else {
+                    String errorMsg = "Update failed";
+                    try {
+                        if (response.errorBody() != null) {
+                            String errStr = response.errorBody().string();
+                            if (errStr.contains("Username already exists")) {
+                                errorMsg = "Username already exists";
+                            }
+                        }
+                    } catch (Exception e) {}
+                    Toast.makeText(EditProfileActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<ApiService.AuthResponse> call, Throwable t) {
+                btnSaveChanges.setEnabled(true);
+                btnSaveChanges.setText("SAVE CHANGES");
+                Toast.makeText(EditProfileActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setupBottomNavigation() {

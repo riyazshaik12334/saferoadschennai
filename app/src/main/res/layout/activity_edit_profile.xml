@@ -103,88 +103,12 @@
                     app:tint="#757575"/>
             </FrameLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="12dp"
-                android:text="Select an avatar"
-                android:textColor="#757575"
-                android:textSize="12sp"/>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:scrollbars="none">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="4dp">
-                    
-                    <ImageView
-                        android:id="@+id/avatarPerson"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_marginEnd="12dp"
-                        android:padding="14dp"
-                        android:src="@drawable/ic_person"
-                        android:background="@drawable/bg_circle_white"
-                        android:elevation="4dp"
-                        app:tint="#1A237E"/>
-
-                    <ImageView
-                        android:id="@+id/avatarSecurity"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_marginEnd="12dp"
-                        android:padding="14dp"
-                        android:src="@drawable/ic_security"
-                        android:background="@drawable/bg_circle_white"
-                        android:elevation="4dp"
-                        app:tint="#757575"/>
-
-                    <ImageView
-                        android:id="@+id/avatarHelp"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_marginEnd="12dp"
-                        android:padding="14dp"
-                        android:src="@drawable/ic_help"
-                        android:background="@drawable/bg_circle_white"
-                        android:elevation="4dp"
-                        app:tint="#757575"/>
-
-                    <ImageView
-                        android:id="@+id/avatarNotifications"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_marginEnd="12dp"
-                        android:padding="14dp"
-                        android:src="@drawable/ic_notifications"
-                        android:background="@drawable/bg_circle_white"
-                        android:elevation="4dp"
-                        app:tint="#757575"/>
-
-                    <ImageView
-                        android:id="@+id/avatarInfo"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_marginEnd="12dp"
-                        android:padding="14dp"
-                        android:src="@drawable/ic_info_circle"
-                        android:background="@drawable/bg_circle_white"
-                        android:elevation="4dp"
-                        app:tint="#757575"/>
-                </LinearLayout>
-            </HorizontalScrollView>
 
             <!-- Full Name -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Full Name"
+                android:text="Username"
                 android:textColor="#212121"
                 android:textStyle="bold"/>
             
@@ -199,7 +123,7 @@
                 android:drawablePadding="12dp"
                 android:drawableTint="#757575"
                 android:paddingHorizontal="12dp"
-                android:textColor="#212121"
+                android:textColor="#333333"
                 android:inputType="textPersonName"/>
 
             <!-- Email -->
@@ -221,33 +145,11 @@
                 android:drawablePadding="12dp"
                 android:drawableTint="#757575"
                 android:paddingHorizontal="12dp"
-                android:textColor="#212121"
-                android:enabled="true"
+                android:textColor="#757575"
+                android:enabled="false"
+                android:focusable="false"
                 android:inputType="textEmailAddress"/>
 
-            <!-- Address -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Address"
-                android:textColor="#212121"
-                android:textStyle="bold"/>
-            
-            <EditText
-                android:id="@+id/etAddress"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="24dp"
-                android:background="@drawable/bg_input_field"
-                android:drawableStart="@drawable/ic_location"
-                android:drawablePadding="12dp"
-                android:drawableTint="#1976D2"
-                android:paddingHorizontal="12dp"
-                android:textColor="#212121"
-                android:hint="Select from map"
-                android:focusable="false"
-                android:clickable="true"/>
 
             <!-- Buttons -->
             <Button

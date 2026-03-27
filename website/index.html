@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Roads Chennai - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Allow bubbles by completely removing the `display: none` */
+        /* Overrides to prevent app.js bubbles from hiding the blue background */
+
+        .top-bar {
+            padding: 2rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .main-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-download {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-download:hover {
+            color: var(--white);
+            background: var(--primary-blue);
+        }
+
+        .hero-center {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            max-width: 600px;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            opacity: 1;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        .btn-primary-blue {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary-blue:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(26, 35, 126, 0.3);
+            background-color: var(--primary-dark);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="nav-brand">
+            <div
+                style="width: 48px; height: 48px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                <img src="assets/logo.png" alt="Logo" style="max-width: 80%; max-height: 80%;">
+            </div>
+            <div class="main-logo">Safe Roads Chennai</div>
+        </div>
+        <div>
+            <a href="#" class="nav-download"><i class="fas fa-download"></i> Download App</a>
+        </div>
+    </div>
+    <div class="hero-center">
+        <h1 class="hero-title">Community Reporting Platform</h1>
+        <p class="hero-subtitle">Working together to create safer streets and better infrastructure for everyone in
+            Chennai. Join us to make a difference.</p>
+        <a href="login.html" class="btn-primary-blue">Get Started</a>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

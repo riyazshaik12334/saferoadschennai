@@ -35,12 +35,15 @@
                     android:id="@+id/headerLogo"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
+                    android:background="@drawable/bg_circle_white"
+                    android:backgroundTint="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:padding="8dp"
                         android:src="@drawable/app_logo"
                         android:scaleType="fitCenter" />
                 </FrameLayout>
@@ -271,41 +274,65 @@
                             android:textStyle="bold"/>
                     </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/etCurrentPassword"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilCurrentPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Current Password"
-                        android:inputType="textPassword"
-                        android:padding="12dp"
-                        android:background="@android:color/transparent"
-                        android:textColorHint="#CFD8DC"
-                        android:textSize="15sp"
-                        android:layout_marginBottom="16dp"/>
+                        android:layout_marginBottom="12dp"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="true"
+                        app:startIconDrawable="@drawable/ic_lock"
+                        app:startIconTint="#90A4AE">
+                        <EditText
+                            android:id="@+id/etCurrentPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="Current Password"
+                            android:inputType="textPassword"
+                            android:paddingHorizontal="12dp"
+                            android:background="@drawable/bg_input_field"
+                            android:textSize="15sp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/etNewPassword"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilNewPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="New Password"
-                        android:inputType="textPassword"
-                        android:padding="12dp"
-                        android:background="@android:color/transparent"
-                        android:textColorHint="#CFD8DC"
-                        android:textSize="15sp"
-                        android:layout_marginBottom="16dp"/>
+                        android:layout_marginBottom="12dp"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="true"
+                        app:startIconDrawable="@drawable/ic_lock"
+                        app:startIconTint="#90A4AE">
+                        <EditText
+                            android:id="@+id/etNewPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="New Password"
+                            android:inputType="textPassword"
+                            android:paddingHorizontal="12dp"
+                            android:background="@drawable/bg_input_field"
+                            android:textSize="15sp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/etConfirmPassword"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilConfirmPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Confirm New Password"
-                        android:inputType="textPassword"
-                        android:padding="12dp"
-                        android:background="@android:color/transparent"
-                        android:textColorHint="#CFD8DC"
-                        android:textSize="15sp"
-                        android:layout_marginBottom="24dp"/>
+                        android:layout_marginBottom="24dp"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="true"
+                        app:startIconDrawable="@drawable/ic_lock"
+                        app:startIconTint="#90A4AE">
+                        <EditText
+                            android:id="@+id/etConfirmPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="Confirm New Password"
+                            android:inputType="textPassword"
+                            android:paddingHorizontal="12dp"
+                            android:background="@drawable/bg_input_field"
+                            android:textSize="15sp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
                         android:id="@+id/btnUpdatePassword"

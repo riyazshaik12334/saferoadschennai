@@ -20,6 +20,11 @@ public class AuthorityHelpActivity extends AppCompatActivity {
         findViewById(R.id.btnCallFire).setOnClickListener(v -> dialNumber("101"));
         findViewById(R.id.btnCallAmbulance).setOnClickListener(v -> dialNumber("108"));
 
+        // Admin Support - Dial Number
+        findViewById(R.id.cardAdminSupport).setOnClickListener(v -> {
+            dialNumber("+919347678977");
+        });
+
         // Bottom Navigation
         findViewById(R.id.navDashboard).setOnClickListener(v -> {
             Intent intent = new Intent(this, AuthorityMainActivity.class);

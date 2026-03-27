@@ -1,0 +1,123 @@
+[
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$tKXjLEPMORGvcV3597L96u$hR6oV4TvAeS3sCQDZb0C456CgZ8SgW5Z5+M6vX/FoFU=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@example.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-02-26T08:52:07.052Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$wO2bJsrCIpXcUInfbs5LU9$hp0eo6LriidGYthYzeRRzl5nBOElmgByq1ercAsec6M=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "riyazshaik252411@gmail.com",
+    "first_name": "Riyaz Shaik",
+    "last_name": "",
+    "email": "riyazshaik252411@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-26T09:20:37.659Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$qJbVvB1yirOA367uQHXefi$AtWBcr7cRTsVQnKxeEwvYh5qHlnxdrpObc10JHs8FM4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "authority_01",
+    "first_name": "Officer Ramesh",
+    "last_name": "",
+    "email": "auth@src.gov.in",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-26T09:38:54.145Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$BjgK6MKcZxJPFvp0KBuJch$heptCLmPTYPhYjTB3d3jYJAR13d+dmyHfSycp3ahwyU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "EMP12345",
+    "first_name": "Authority Officer",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-02T07:09:24.182Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$QNd3a2SbAeDI3VjAx5bHhm$b4Xuk/kV0zM5XXLDrSS7xPi8K6u9Q/OhCc2H5N3WvdY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "riyazpspk22222@gmail.com",
+    "first_name": "Riyazgigigi",
+    "last_name": "",
+    "email": "riyazpspk22222@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-02T07:36:46.023Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "api.complaint",
+  "pk": "SRC-44428",
+  "fields": {
+    "title": "3/47,Chettipedu Village, Kuthambakkam, Tamil Nadu 600123, India",
+    "zone": "Kuthambakkam",
+    "reporter": "Riyazgigigi",
+    "status": "In Progress",
+    "date": "02 Mar 2026, 14:44",
+    "priority": "Medium",
+    "image_res_id": 0,
+    "image": "",
+    "description": "",
+    "latitude": 13.027027027027026,
+    "longitude": 80.02346017167355,
+    "reporter_mobile": "9347678977"
+  }
+},
+{
+  "model": "api.complaint",
+  "pk": "TEST-456",
+  "fields": {
+    "title": "Test Title",
+    "zone": "Test Zone",
+    "reporter": "Test Reporter",
+    "status": "Resolved",
+    "date": "2026-03-02",
+    "priority": "High",
+    "image_res_id": 0,
+    "image": "",
+    "description": "Test Description",
+    "latitude": 13.0,
+    "longitude": 80.0,
+    "reporter_mobile": "1234567890"
+  }
+}
+]

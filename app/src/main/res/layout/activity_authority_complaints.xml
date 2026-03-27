@@ -190,13 +190,20 @@
     </LinearLayout>
 
     <!-- List and Empty State -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvComplaints"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
-        app:layout_constraintTop_toBottomOf="@id/contentLayout" />
+        app:layout_constraintTop_toBottomOf="@id/contentLayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvComplaints"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/emptyState"

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Safe Roads Chennai</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .support-header {
+            background-color: var(--primary-blue);
+            padding: 3rem 1rem 5rem;
+            color: var(--white);
+            text-align: center;
+            border-radius: 0 0 40px 40px;
+            position: relative;
+        }
+
+        .btn-back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .support-logo {
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .support-logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .support-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .support-content {
+            margin-top: -30px;
+            padding: 0 20px 40px;
+        }
+
+        .support-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .section-title {
+            color: #C62828;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title.blue {
+            color: var(--primary-blue);
+        }
+
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .contact-box {
+            background: #F8F9FD;
+            padding: 15px 10px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .contact-box:hover {
+            transform: translateY(-5px);
+            background: #F0F2F9;
+        }
+
+        .contact-number {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #102027;
+            margin-bottom: 4px;
+        }
+
+        .contact-label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .support-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-link {
+            display: flex;
+            align-items: center;
+            background: #F8F9FD;
+            padding: 18px 20px;
+            border-radius: 18px;
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .admin-link i:first-child {
+            font-size: 1.4rem;
+            margin-right: 15px;
+        }
+
+        .admin-link i:last-child {
+            margin-left: auto;
+            font-size: 0.9rem;
+            opacity: 0.5;
+        }
+
+        .admin-link:hover {
+            background: #E8EAF6;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="support-header">
+        <a href="login.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="support-logo">
+            <img src="assets/logo.png" alt="Logo">
+        </div>
+        <h1 class="support-title">Forgot Password Support</h1>
+    </div>
+
+    <div class="premium-container support-content">
+        <!-- Emergency Contacts -->
+        <div class="support-card animate-fade-in">
+            <h2 class="section-title">Emergency Contacts</h2>
+            <div class="emergency-grid">
+                <div class="contact-box">
+                    <span class="contact-number">100</span>
+                    <span class="contact-label">Police</span>
+                </div>
+                <div class="contact-box">
+                    <span class="contact-number">101</span>
+                    <span class="contact-label">Fire</span>
+                </div>
+                <div class="contact-box">
+                    <span class="contact-number">108</span>
+                    <span class="contact-label">Ambulance</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Support -->
+        <div class="support-card animate-fade-in" style="animation-delay: 0.2s;">
+            <h2 class="section-title blue">Admin & System Support</h2>
+            <p class="support-desc">
+                For login issues or password resets, contact our system administrator.
+            </p>
+            <a href="tel:+919347678977" class="admin-link">
+                <i class="fas fa-user-circle"></i>
+                <span>+91 9347678977</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="background-bubbles">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+    </div>
+</body>
+
+</html>

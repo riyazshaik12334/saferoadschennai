@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervisor Portal - Safe Roads Chennai</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="js/app.js"></script>
+    <style>
+        .sidebar {
+            width: 260px;
+            background: var(--white);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem 1.5rem;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 16px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link.active,
+        .nav-link:hover {
+            background: #E8EAF6;
+            color: var(--primary-blue);
+        }
+
+        .action-btn {
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .action-btn:hover {
+            background: #283593;
+            transform: translateY(-1px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #eee;
+            border-radius: 12px;
+            font-family: inherit;
+        }
+
+        #imagePreview {
+            width: 100%;
+            max-height: 250px;
+            border-radius: 12px;
+            object-fit: contain;
+            margin-top: 10px;
+            display: none;
+            border: 1px solid #eee;
+            background: #000;
+        }
+
+        /* Status Badges */
+        .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-pending {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffe0b2;
+        }
+
+        .badge-processing, .badge-in-progress {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+        }
+
+        .badge-resolved, .badge-fixed, .badge-closed {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #E8EAF6;
+            color: var(--primary-blue);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 2.5rem;">
+            <img src="assets/logo.png" alt="Logo" style="height: 40px;">
+            <h2 style="color: var(--primary-blue); font-size: 1.2rem;">SRC Supervisor</h2>
+        </div>
+        <nav id="dynamicNav">
+            <!-- Sidebar links will be injected by app.js -->
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header style="margin-bottom: 2rem;">
+            <h2 style="font-size: 1.8rem;">Supervisor Work Queue</h2>
+            <p style="color: var(--text-muted);">Manage your assigned tasks and review completed work.</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('active', this)">Ongoing Work</button>
+            <button class="tab-btn" onclick="switchTab('completed', this)">Completed Work</button>
+        </div>
+
+        <div id="supervisorListContainer">
+            <div class="text-center p-4">Loading assigned tasks...</div>
+        </div>
+    </div>
+
+    <!-- Submit Evidence Modal -->
+    <div id="submitModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-camera"></i> Submit Evidence</h3>
+            <form id="evidenceForm">
+                <input type="hidden" id="activeComplaintId">
+                <div class="form-group">
+                    <label>Supervisor Name</label>
+                    <input type="text" id="supName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Resolution Image</label>
+                    <input type="file" id="supImage" accept="image/*" required onchange="previewImage(event)">
+                    <img id="imagePreview" src="" alt="Preview" style="cursor: pointer;" onclick="if(this.src) window.UI.showImageModal(this.src)">
+                </div>
+                <button type="submit" class="action-btn" style="width: 100%; padding: 14px;">Submit to Authority</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentUserId = "";
+
+        let allComplaints = [];
+        let currentTab = "active";
+
+        async function initSupervisorView(user) {
+            const listContainer = document.getElementById("supervisorListContainer");
+            try {
+                allComplaints = await Api.get("complaints/");
+                renderComplaints();
+            } catch (error) {
+                listContainer.innerHTML = '<div class="text-center p-4 text-danger">Error loading work queue</div>';
+            }
+        }
+
+        window.switchTab = (tab, btn) => {
+            currentTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderComplaints();
+        };
+
+        function renderComplaints() {
+            const listContainer = document.getElementById("supervisorListContainer");
+            const complaints = allComplaints.filter(item => {
+                const s = (item.status || "").toLowerCase();
+                const isResolved = ["resolved", "fixed", "closed"].includes(s);
+                const isOngoing = ["processing", "in progress"].includes(s);
+                return currentTab === "completed" ? isResolved : isOngoing;
+            });
+
+            listContainer.innerHTML = "";
+            if (complaints.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="card p-5 text-center">
+                        <i class="fas fa-tasks fa-3x mb-3" style="color: #eee;"></i>
+                        <h4 style="color: var(--text-muted);">No ${currentTab} tasks found</h4>
+                    </div>
+                `;
+                return;
+            }
+
+            complaints.forEach(item => {
+                const card = document.createElement("div");
+                card.className = "card animate-fade-in mb-3";
+
+                const proofBlock = item.proof ? `
+                    <div style="margin-top: 15px; padding: 12px; background: #e8f5e9; border-radius: 12px; border: 1px dashed #4caf50;">
+                        <p style="font-size: 0.8rem; font-weight: 700; color: #2e7d32; margin-bottom: 8px;">
+                            <i class="fas fa-check-double"></i> Previously Submitted Proof:
+                        </p>
+                        <div style="width: 100%; height: 150px; border-radius: 8px; overflow: hidden; background: #000; position: relative;">
+                            <img data-src="${item.proof}" style="width: 100%; height: 100%; object-fit: contain; cursor: pointer; position: relative; z-index: 5;" onclick="event.stopPropagation(); window.UI.showImageModal('${item.proof}')">
+                        </div>
+                    </div>
+                ` : '';
+
+                const ratingBlock = item.rating || item.rating_description ? `
+                    <div style="margin-top: 15px; padding: 15px; background: #FFFDE7; border-radius: 12px; border: 1px solid #FFF59D;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-size: 0.85rem; font-weight: 700; color: #F57F17;">
+                                <i class="fas fa-star"></i> Citizen Feedback
+                            </span>
+                            <div style="color: #FBC02D; font-size: 1rem; font-weight: bold;">
+                                ${item.rating ? '★'.repeat(item.rating) + '☆'.repeat(5-item.rating) : 'Unrated'}
+                                <span style="color: #666; font-size: 0.75rem; margin-left: 4px;">(${item.rating || 0}/5)</span>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #455A64; margin: 0; font-style: italic;">
+                            ${item.rating_description ? `"${item.rating_description}"` : 'No comments provided.'}
+                        </p>
+                    </div>
+                ` : '';
+
+                const s = item.status || "Pending";
+                const isResolved = ["resolved", "fixed", "closed"].includes(s.toLowerCase());
+                const statusClass = isResolved ? "resolved" : "processing";
+
+                card.innerHTML = `
+                    <div style="display: flex; gap: 20px;">
+                        <div style="width: 120px; height: 120px; border-radius: 12px; overflow: hidden; background: #000; flex-shrink: 0; position: relative;">
+                            ${item.image ? `<img data-src="${item.image}" style="width: 100%; height: 100%; object-fit: contain; cursor: pointer; position: relative; z-index: 5;" onclick="event.stopPropagation(); window.UI.showImageModal('${item.image}')">` : '<i class="fas fa-image" style="display: block; text-align: center; margin-top: 50px; color: #ccc;"></i>'}
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                <div>
+                                    <h4 style="margin-bottom: 2px;">${item.title || "Complaint"}</h4>
+                                    <p style="font-size: 0.75rem; font-weight: 600; color: var(--primary-blue); margin-bottom: 5px;">SRC Number: ${window.UI.formatId(item.report_id)}</p>
+                                </div>
+                                <span class="badge badge-${statusClass}">${s}</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">${item.description}</p>
+                            ${proofBlock}
+                            ${ratingBlock}
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                                <div style="display: flex; gap: 15px; font-size: 0.8rem; color: var(--text-muted);">
+                                    <span><i class="fas fa-map-marker-alt"></i> ${item.zone}</span>
+                                    <span><i class="fas fa-calendar-alt"></i> ${new Date(item.created_at).toLocaleDateString()}</span>
+                                </div>
+                                ${!isResolved ? `
+                                    <button class="action-btn" onclick="openSubmitModal('${item.report_id}')">
+                                        <i class="fas fa-upload"></i> ${item.proof ? 'Update Evidence' : 'Submit Evidence'}
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                listContainer.appendChild(card);
+                if (item.image) {
+                    const img = card.querySelector('img[data-src="' + item.image + '"]');
+                    if (img) UI.loadImage(item.image, img);
+                }
+                if (item.proof) {
+                    const img = card.querySelector('img[data-src="' + item.proof + '"]');
+                    if (img) UI.loadImage(item.proof, img);
+                }
+            });
+        }
+
+        window.openSubmitModal = (id) => {
+            document.getElementById("activeComplaintId").value = id;
+            document.getElementById("submitModal").style.display = "block";
+            // Pre-fill name if session has it
+            const session = Session.get();
+            if (session && session.name) document.getElementById("supName").value = session.name;
+        };
+
+        window.closeModal = () => {
+            document.getElementById("submitModal").style.display = "none";
+            document.getElementById("evidenceForm").reset();
+            document.getElementById("imagePreview").style.display = "none";
+        };
+
+        window.previewImage = (event) => {
+            const preview = document.getElementById("imagePreview");
+            const file = event.target.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = "block";
+            }
+        };
+
+        document.getElementById("evidenceForm").onsubmit = async (e) => {
+            e.preventDefault();
+            const id = document.getElementById("activeComplaintId").value;
+            const name = document.getElementById("supName").value;
+            const fileInput = document.getElementById("supImage");
+            
+            const formData = new FormData();
+            formData.append("supervisor_name", name);
+            if (fileInput.files[0]) {
+                formData.append("supervisor_image", fileInput.files[0]);
+                formData.append("proof", fileInput.files[0]);
+            }
+
+            try {
+                const btn = e.target.querySelector('button');
+                UI.showLoading(btn, "Uploading...");
+                
+                await Api.patch(`complaints/${id}/`, formData, true);
+                
+                alert("Evidence submitted successfully! Authority will be notified.");
+                closeModal();
+                location.reload();
+            } catch (error) {
+                console.error(error);
+                alert("Submission failed: " + error.message);
+                UI.hideLoading(e.target.querySelector('button'));
+            }
+        };
+
+        window.onclick = (event) => {
+            if (event.target == document.getElementById("submitModal")) closeModal();
+        };
+    </script>
+</body>
+
+</html>

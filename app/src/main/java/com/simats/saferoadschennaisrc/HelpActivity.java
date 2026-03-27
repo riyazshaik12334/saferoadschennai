@@ -24,6 +24,20 @@ public class HelpActivity extends AppCompatActivity {
         findViewById(R.id.btnCallGCC).setOnClickListener(v -> dialNumber("1913"));
         findViewById(R.id.btnCallControl).setOnClickListener(v -> dialNumber("04425384520"));
         findViewById(R.id.btnWhatsApp).setOnClickListener(v -> dialNumber("+919444122244"));
+
+        // Email Support
+        findViewById(R.id.btnEmailSupport).setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:chennaisaferoads@gmail.com"));
+            intent.setPackage("com.google.android.gm");
+            try {
+                startActivity(intent);
+            } catch (android.content.ActivityNotFoundException e) {
+                // Fallback if Gmail app is not installed
+                intent.setPackage(null);
+                startActivity(Intent.createChooser(intent, "Send Email"));
+            }
+        });
     }
 
     private void dialNumber(String number) {

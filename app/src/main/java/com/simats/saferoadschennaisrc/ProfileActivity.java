@@ -74,11 +74,21 @@ public class ProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(this, TermsActivity.class);
             startActivity(intent);
         });
-        findViewById(R.id.btnDelete).setOnClickListener(stubListener);
+        findViewById(R.id.btnDelete).setOnClickListener(v -> {
+            Intent intent = new Intent(this, ConfirmDeleteAccountActivity.class);
+            startActivity(intent);
+        });
 
         // Logic for Logout
         findViewById(R.id.btnLogout).setOnClickListener(v -> {
-            prefs.edit().clear().apply(); // Clear session
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.remove("USER_PASSWORD");
+            editor.putBoolean("REMEMBER_ME", false);
+            editor.remove("AUTH_TOKEN");
+            // Optionally clear USER_NAME and USER_ROLE. Keeping USER_EMAIL for input hint
+            // is fine.
+            editor.apply();
+
             Intent intent = new Intent(this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -127,5 +137,40 @@ public class ProfileActivity extends AppCompatActivity {
         if (!name.isEmpty()) {
             ((TextView) findViewById(R.id.tvUserName)).setText(name);
         }
+
+        updateProfileStats();
+    }
+
+    private void updateProfileStats() {
+        ComplaintStore store = ComplaintStore.getInstance();
+        SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
+        String currentUserName = prefs.getString("USER_NAME", "Resident");
+
+        int totalCount = 0;
+        int fixedCount = 0;
+        int pendingCount = 0;
+
+        for (ComplaintModel report : store.getComplaints()) {
+            if (report.getReporter().equals(currentUserName)) {
+                totalCount++;
+                if ("Pending".equalsIgnoreCase(report.getStatus())) {
+                    pendingCount++;
+                } else if ("Resolved".equalsIgnoreCase(report.getStatus())
+                        || "Fixed".equalsIgnoreCase(report.getStatus())) {
+                    fixedCount++;
+                }
+            }
+        }
+
+        TextView tvTotal = findViewById(R.id.tvProfileTotalCount);
+        TextView tvFixed = findViewById(R.id.tvProfileFixedCount);
+        TextView tvPending = findViewById(R.id.tvProfilePendingCount);
+
+        if (tvTotal != null)
+            tvTotal.setText(String.valueOf(totalCount));
+        if (tvFixed != null)
+            tvFixed.setText(String.valueOf(fixedCount));
+        if (tvPending != null)
+            tvPending.setText(String.valueOf(pendingCount));
     }
 }

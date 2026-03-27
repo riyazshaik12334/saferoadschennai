@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Complaint - Safe Roads Chennai</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .sidebar {
+            width: 260px;
+            background: var(--white);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem 1.5rem;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 16px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link.active,
+        .nav-link:hover {
+            background: #E8EAF6;
+            color: var(--primary-blue);
+        }
+
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed #E1E8EE;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 2.5rem;">
+            <img src="assets/logo.png" alt="Logo" style="height: 40px;">
+            <h2 style="color: var(--primary-blue); font-size: 1.2rem;">SRC Portal</h2>
+        </div>
+        <nav id="dynamicNav">
+            <!-- Sidebar links will be injected by app.js -->
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header style="margin-bottom: 2rem;">
+            <h2 style="font-size: 1.8rem;">Report a Complaint</h2>
+            <p style="color: var(--text-muted);">Provide details about the issue to help local authorities take action.
+            </p>
+        </header>
+
+        <div class="card glass animate-fade-in" style="max-width: 800px;">
+            <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px;">
+                <div>
+                    <div class="image-preview" id="imagePreview">
+                        <div style="text-align: center; color: var(--text-muted);">
+                            <i class="fas fa-camera fa-2x"></i>
+                            <p style="font-size: 0.8rem; margin-top: 10px;">Click to upload photo</p>
+                        </div>
+                    </div>
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+
+                    <div class="input-group">
+                        <label>Priority Level</label>
+                        <select id="priority"
+                            style="width: 100%; padding: 12px; border: 2px solid #E1E8EE; border-radius: 12px; outline: none;">
+                            <option value="Normal">Normal</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="input-group">
+                        <label>Complaint Title</label>
+                        <input type="text" id="title" placeholder="e.g. Pothole on Mount Road">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Description</label>
+                        <textarea id="description"
+                            style="width: 100%; height: 120px; padding: 12px; border: 2px solid #E1E8EE; border-radius: 12px; outline: none;"
+                            placeholder="Provide more details..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Mobile Number (Required for App Support)</label>
+                        <input type="tel" id="mobile" placeholder="Enter your 10-digit mobile number">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Location (Zone)</label>
+                        <select id="zone"
+                            style="width: 100%; padding: 12px; border: 2px solid #E1E8EE; border-radius: 12px; outline: none;">
+                            <option value="T Nagar">T Nagar</option>
+                            <option value="Adyar">Adyar</option>
+                            <option value="Anna Nagar">Anna Nagar</option>
+                            <option value="Velachery">Velachery</option>
+                            <option value="Mylapore">Mylapore</option>
+                            <option value="Other">Other (Manual Entry)</option>
+                        </select>
+                    </div>
+
+                    <div id="manualLocationGroup" class="input-group" style="display: none;">
+                        <label>Enter Exact Location</label>
+                        <input type="text" id="manualLocation" placeholder="e.g. 15 Anna Salai, Near Metro Station">
+                    </div>
+
+                    <button class="btn btn-primary" id="btnSubmit" style="width: 100%;">Submit Complaint</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        const imagePreview = document.getElementById('imagePreview');
+        const imageInput = document.getElementById('imageInput');
+        let selectedFile = null;
+
+        imagePreview.onclick = () => imageInput.click();
+
+        imageInput.onchange = (e) => {
+            selectedFile = e.target.files[0];
+            if (selectedFile) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    imagePreview.innerHTML = `<img src="${event.target.result}">`;
+                };
+                reader.readAsDataURL(selectedFile);
+            }
+        };
+
+        document.getElementById('zone').onchange = (e) => {
+            document.getElementById('manualLocationGroup').style.display = e.target.value === 'Other' ? 'block' : 'none';
+        };
+
+        document.getElementById('btnSubmit').onclick = async () => {
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const priority = document.getElementById('priority').value;
+            const zoneSelect = document.getElementById('zone').value;
+            const manualLocation = document.getElementById('manualLocation').value;
+            const zone = zoneSelect === 'Other' ? manualLocation : zoneSelect;
+            const mobile = document.getElementById('mobile')?.value || Session.get()?.mobile;
+            const btn = document.getElementById('btnSubmit');
+
+            if (!title || !description || !mobile) return alert("Please fill Title, Description and Mobile Number");
+
+            // Generate App-compatible data (Local Time)
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const timestamp = `${year}${month}${day}_${hours}${minutes}${seconds}`;
+            const reportId = "SRC-" + timestamp.slice(-5);
+
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const dateStr = `${day} ${monthNames[now.getMonth()]} ${year}, ${hours}:${minutes}`;
+
+            const formData = new FormData();
+            formData.append('report_id', reportId);
+            formData.append('title', title);
+            formData.append('description', description);
+            formData.append('priority', priority);
+            formData.append('zone', zone);
+            formData.append('reporter', Session.get()?.name || "Web User");
+            formData.append('reporter_mobile', mobile);
+            formData.append('reporter_email', Session.get()?.email || "unknown@link.com");
+            formData.append('status', 'Pending');
+            formData.append('date', dateStr);
+            formData.append('latitude', '0'); // Send 0 to trigger map text search
+            formData.append('longitude', '0'); 
+
+            if (selectedFile) formData.append('image', selectedFile);
+
+            try {
+                UI.showLoading(btn, "Submitting...");
+                await Api.post("complaints/", formData, true);
+                alert("Complaint submitted successfully!");
+                window.location.href = "my-reports.html";
+            } catch (error) {
+                alert(error.message);
+                UI.hideLoading(btn);
+            }
+        };
+    </script>
+</body>
+
+</html>

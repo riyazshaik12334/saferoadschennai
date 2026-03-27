@@ -52,21 +52,37 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <FrameLayout
+            <LinearLayout
                 android:id="@+id/layoutEvidencePhoto"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
+                android:minHeight="200dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_dashed_border"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgEvidencePreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:maxHeight="300dp"
+                    android:scaleType="fitCenter"
+                    android:visibility="gone"
+                    android:layout_margin="8dp"
+                    tools:src="@tools:sample/backgrounds/scenic" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp">
 
                     <ImageView
                         android:layout_width="48dp"
@@ -75,6 +91,7 @@
                         app:tint="#9E9E9E" />
 
                     <TextView
+                        android:id="@+id/tvUploadPrompt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -91,16 +108,8 @@
                         android:textColor="#9E9E9E"
                         android:textSize="12sp" />
                 </LinearLayout>
-                
-                <ImageView
-                    android:id="@+id/imgEvidencePreview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:visibility="gone"
-                    tools:src="@tools:sample/backgrounds/scenic" />
 
-            </FrameLayout>
+            </LinearLayout>
 
             <!-- Location -->
             <LinearLayout
@@ -245,12 +254,38 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <!-- Mobile Number (Required) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Mobile Number (Required)"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etMobile"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input_field"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="12dp"
+                android:drawableTint="@color/text_secondary"
+                android:hint="Enter your mobile number (Required)"
+                android:paddingHorizontal="12dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:inputType="phone"
+                android:importantForAutofill="no"/>
+
             <!-- Description -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Description"
+                android:text="Description (Optional)"
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -262,7 +297,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_input_field"
                 android:gravity="top|start"
-                android:hint="Describe the issue (e.g., size, depth, hazard level)"
+                android:hint="Describe the issue (optional)"
                 android:padding="12dp"
                 android:textColor="@color/text_primary"
                 android:textColorHint="@color/text_hint"

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -66,10 +67,57 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
 
-        // Simulate success
-        Intent intent = new Intent(this, ResetPasswordSuccessActivity.class);
-        intent.putExtra("is_update_mode", true);
-        startActivity(intent);
-        finish();
+        // Retrieve Email from SharedPreferences
+        android.content.SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
+        String email = prefs.getString("USER_EMAIL", "");
+
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Error: User session expired. Please login again.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // API Call
+        com.simats.saferoadschennaisrc.network.ApiService apiService = com.simats.saferoadschennaisrc.network.RetrofitClient
+                .getApiService();
+        com.simats.saferoadschennaisrc.network.ApiService.ChangePasswordRequest request = new com.simats.saferoadschennaisrc.network.ApiService.ChangePasswordRequest(
+                email, currentPass, newPass);
+
+        apiService.changePassword(request).enqueue(new retrofit2.Callback<Void>() {
+            @Override
+            public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(SettingsActivity.this, "Password Updated Successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SettingsActivity.this, ResetPasswordSuccessActivity.class);
+                    intent.putExtra("is_update_mode", true);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    String error = "Update failed";
+                    try {
+                        if (response.errorBody() != null) {
+                            String errorJson = response.errorBody().string();
+                            if (errorJson.contains("Incorrect current password")) {
+                                error = "Current password wrong";
+                            }
+                        }
+                    } catch (Exception e) {
+                    }
+                    if ("Current password wrong".equals(error)) {
+                        new AlertDialog.Builder(SettingsActivity.this)
+                                .setTitle("Update Failed")
+                                .setMessage("The current password you entered is incorrect. Please try again.")
+                                .setPositiveButton("OK", null)
+                                .show();
+                    } else {
+                        Toast.makeText(SettingsActivity.this, error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<Void> call, Throwable t) {
+                Toast.makeText(SettingsActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

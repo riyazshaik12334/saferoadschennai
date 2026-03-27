@@ -194,6 +194,43 @@
                             app:tint="#CFD8DC" />
                     </LinearLayout>
 
+                    <!-- Change Password -->
+                    <LinearLayout
+                        android:id="@+id/btnChangePassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_badge_red_light"
+                            android:backgroundTint="#E8EAF6"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_lock"
+                            app:tint="#3F51B5" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="Change Password"
+                            android:textColor="#455A64"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_chevron_right"
+                            app:tint="#CFD8DC" />
+                    </LinearLayout>
+
                     <!-- Settings -->
                     <LinearLayout
                         android:id="@+id/btnSettings"

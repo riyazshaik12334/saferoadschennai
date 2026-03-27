@@ -51,7 +51,33 @@ public class VerifyOtpActivity extends AppCompatActivity {
         tvResendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(VerifyOtpActivity.this, "OTP Resent Successfully", Toast.LENGTH_SHORT).show();
+                if (email == null || email.isEmpty()) return;
+                
+                tvResendOtp.setEnabled(false);
+                tvResendOtp.setText("Sending...");
+                
+                com.simats.saferoadschennaisrc.network.ApiService apiService = com.simats.saferoadschennaisrc.network.RetrofitClient.getApiService();
+                com.simats.saferoadschennaisrc.network.ApiService.SendOtpRequest request = new com.simats.saferoadschennaisrc.network.ApiService.SendOtpRequest(email);
+                
+                apiService.sendOtp(request).enqueue(new retrofit2.Callback<okhttp3.ResponseBody>() {
+                    @Override
+                    public void onResponse(retrofit2.Call<okhttp3.ResponseBody> call, retrofit2.Response<okhttp3.ResponseBody> response) {
+                        tvResendOtp.setEnabled(true);
+                        tvResendOtp.setText("Resend OTP");
+                        if (response.isSuccessful()) {
+                            Toast.makeText(VerifyOtpActivity.this, "OTP Sent Successfully", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(VerifyOtpActivity.this, "Failed to resend OTP", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(retrofit2.Call<okhttp3.ResponseBody> call, Throwable t) {
+                        tvResendOtp.setEnabled(true);
+                        tvResendOtp.setText("Resend OTP");
+                        Toast.makeText(VerifyOtpActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -75,16 +101,39 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
                 if (otp.length() < 4) {
                     Toast.makeText(VerifyOtpActivity.this, "Please enter 4-digit OTP", Toast.LENGTH_SHORT).show();
-                } else if (otp.equals("1234")) {
-                    Toast.makeText(VerifyOtpActivity.this, "Verification Successful", Toast.LENGTH_SHORT).show();
-                    // Navigate to Reset Password Screen
-                    android.content.Intent intent = new android.content.Intent(VerifyOtpActivity.this,
-                            ResetPasswordActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(VerifyOtpActivity.this, "Wrong OTP", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                // API Call to Verify OTP
+                com.simats.saferoadschennaisrc.network.ApiService apiService = com.simats.saferoadschennaisrc.network.RetrofitClient
+                        .getApiService();
+                com.simats.saferoadschennaisrc.network.ApiService.VerifyOtpRequest request = new com.simats.saferoadschennaisrc.network.ApiService.VerifyOtpRequest(
+                        email, otp);
+
+                apiService.verifyOtp(request).enqueue(new retrofit2.Callback<okhttp3.ResponseBody>() {
+                    @Override
+                    public void onResponse(retrofit2.Call<okhttp3.ResponseBody> call,
+                            retrofit2.Response<okhttp3.ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(VerifyOtpActivity.this, "Verification Successful", Toast.LENGTH_SHORT)
+                                    .show();
+                            // Navigate to Reset Password Screen
+                            android.content.Intent intent = new android.content.Intent(VerifyOtpActivity.this,
+                                    ResetPasswordActivity.class);
+                            intent.putExtra("email", email);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(VerifyOtpActivity.this, "Invalid or expired OTP", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(retrofit2.Call<okhttp3.ResponseBody> call, Throwable t) {
+                        Toast.makeText(VerifyOtpActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                });
             }
         });
     }

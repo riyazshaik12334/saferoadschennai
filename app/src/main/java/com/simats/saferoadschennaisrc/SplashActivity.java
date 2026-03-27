@@ -16,9 +16,24 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                android.content.SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
+                String token = prefs.getString("AUTH_TOKEN", null);
+                String role = prefs.getString("USER_ROLE", "");
+
+                Intent intent;
+                if (token != null && !token.isEmpty()) {
+                    if ("AUTHORITY".equalsIgnoreCase(role)) {
+                        intent = new Intent(SplashActivity.this, AuthorityMainActivity.class);
+                    } else if ("SUPERVISOR".equalsIgnoreCase(role)) {
+                        intent = new Intent(SplashActivity.this, SupervisorMainActivity.class);
+                    } else {
+                        intent = new Intent(SplashActivity.this, MainActivity.class);
+                    }
+                } else {
+                    intent = new Intent(SplashActivity.this, LoginActivity.class);
+                }
                 startActivity(intent);
-                finish(); // Finish SplashActivity so the user can't go back to it
+                finish(); 
             }
         }, 3000); // 3000 milliseconds = 3 seconds
     }

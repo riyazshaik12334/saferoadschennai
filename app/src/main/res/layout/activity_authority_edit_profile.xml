@@ -124,62 +124,12 @@
                     android:textStyle="bold" />
             </FrameLayout>
 
-            <!-- Contact Information Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:text="Contact Information"
-                android:textColor="#102027"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Phone Number"
-                android:textColor="#546E7A"
-                android:textSize="14sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_input_field"
-                android:backgroundTint="#FFFFFF"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="16dp">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_phone"
-                    app:tint="#546E7A" />
-
-                <EditText
-                    android:id="@+id/etPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:background="@android:color/transparent"
-                    android:focusable="false"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:hint="Phone Number"
-                    android:inputType="none"
-                    android:text="+91 94567 12345"
-                    android:textColor="#102027"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
             <!-- Official Information Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Official Information"
+                android:text="Officer Information"
                 android:textColor="#102027"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -188,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Full Name"
+                android:text="Officer Name"
                 android:textColor="#546E7A"
                 android:textSize="14sp" />
 
@@ -207,11 +157,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:focusable="false"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:hint="Full Name"
-                    android:inputType="none"
+                    android:hint="First Name"
+                    android:inputType="textPersonName"
                     android:text="Officer Suresh"
                     android:textColor="#102027"
                     android:textSize="15sp" />
@@ -221,7 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Officer ID"
+                android:text="Employee ID (Fixed)"
                 android:textColor="#546E7A"
                 android:textSize="14sp" />
 
@@ -230,7 +177,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_input_field"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="#F0F0F0"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingHorizontal="16dp">
@@ -253,9 +200,21 @@
                     android:hint="Officer ID"
                     android:inputType="none"
                     android:text="EMP-10042"
-                    android:textColor="#102027"
+                    android:textColor="#546E7A"
                     android:textSize="15sp" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSaveChanges"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/bg_login_gradient"
+                android:text="SAVE CHANGES"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@null" />
 
         </LinearLayout>
     </ScrollView>

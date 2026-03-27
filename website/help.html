@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - Safe Roads Chennai</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .sidebar {
+            width: 260px;
+            background: var(--white);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem 1.5rem;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 16px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link.active,
+        .nav-link:hover {
+            background: #E8EAF6;
+            color: var(--primary-blue);
+        }
+
+        .support-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow-soft);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s;
+        }
+
+        .support-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .support-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 2.5rem;">
+            <img src="assets/logo.png" alt="Logo" style="height: 40px;">
+            <h2 style="color: var(--primary-blue); font-size: 1.2rem;">SRC Portal</h2>
+        </div>
+        <nav id="dynamicNav">
+            <!-- Sidebar links will be injected by app.js -->
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header style="margin-bottom: 3rem;">
+            <h2 style="font-size: 1.8rem;">Help & Support</h2>
+            <p style="color: var(--text-muted);">Get assistance with the app or contact emergency services.</p>
+        </header>
+
+
+
+        <h3 style="margin-bottom: 1.5rem;">Technical Support</h3>
+        <div class="card glass">
+            <div style="display: flex; gap: 40px; align-items: center;">
+                <div style="flex: 1;">
+                    <h4>Having trouble with the portal?</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0 20px;">
+                        Our IT support team is available from 9 AM to 6 PM. You can reach out for password issues, app
+                        crashes, or connectivity problems.
+                    </p>
+                    <div style="display: flex; gap: 20px;">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=chennaisaferoads@gmail.com" target="_blank" class="btn btn-primary">Email Support</a>
+                        <a href="javascript:void(0)" class="btn" style="background: #eee; color: #333; cursor: default;"><i
+                                class="fas fa-phone"></i> 9347678977</a>
+                    </div>
+                </div>
+                <div style="width: 200px; opacity: 0.1;">
+                    <i class="fas fa-headset fa-8x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

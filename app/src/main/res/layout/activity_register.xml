@@ -66,28 +66,6 @@
             android:orientation="vertical"
             android:paddingBottom="24dp">
 
-            <!-- Full Name -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/full_name"
-                android:textColor="@color/text_secondary"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etFullName"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_input_field"
-                android:drawableStart="@android:drawable/ic_menu_myplaces"
-                android:drawablePadding="12dp"
-                android:drawableTint="@color/text_secondary"
-                android:inputType="textPersonName"
-                android:paddingHorizontal="12dp"
-                android:hint="@string/hint_full_name"
-                android:textColor="@color/text_primary"
-                android:textColorHint="@color/text_hint" />
 
             <!-- Mobile Number -->
             <TextView
@@ -171,20 +149,36 @@
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"/>
 
-            <EditText
-                android:id="@+id/etPassword"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/bg_input_field"
-                android:drawableStart="@android:drawable/ic_lock_idle_lock"
-                android:drawablePadding="12dp"
-                android:drawableTint="@color/text_secondary"
-                android:inputType="textPassword"
-                android:paddingHorizontal="12dp"
-                android:hint="@string/hint_password_dots"
-                android:textColor="@color/text_primary"
-                android:textColorHint="@color/text_hint" />
+                android:background="@drawable/bg_input_field">
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@id/ivTogglePasswordReg"
+                    android:background="@null"
+                    android:drawableStart="@android:drawable/ic_lock_idle_lock"
+                    android:drawablePadding="12dp"
+                    android:drawableTint="@color/text_secondary"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="12dp"
+                    android:hint="@string/hint_password_dots"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_hint" />
+
+                <ImageView
+                    android:id="@+id/ivTogglePasswordReg"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:padding="12dp"
+                    android:src="@android:drawable/ic_menu_view"
+                    android:tint="@color/text_secondary" />
+            </RelativeLayout>
 
             <!-- Confirm Password -->
             <TextView
@@ -195,20 +189,36 @@
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"/>
 
-            <EditText
-                android:id="@+id/etConfirmPassword"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/bg_input_field"
-                android:drawableStart="@android:drawable/ic_lock_idle_lock"
-                android:drawablePadding="12dp"
-                android:drawableTint="@color/text_secondary"
-                android:inputType="textPassword"
-                android:paddingHorizontal="12dp"
-                android:hint="@string/hint_password_dots"
-                android:textColor="@color/text_primary"
-                android:textColorHint="@color/text_hint" />
+                android:background="@drawable/bg_input_field">
+
+                <EditText
+                    android:id="@+id/etConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@id/ivToggleConfirmPassword"
+                    android:background="@null"
+                    android:drawableStart="@android:drawable/ic_lock_idle_lock"
+                    android:drawablePadding="12dp"
+                    android:drawableTint="@color/text_secondary"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="12dp"
+                    android:hint="@string/hint_password_dots"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_hint" />
+
+                <ImageView
+                    android:id="@+id/ivToggleConfirmPassword"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:padding="12dp"
+                    android:src="@android:drawable/ic_menu_view"
+                    android:tint="@color/text_secondary" />
+            </RelativeLayout>
 
             <!-- Terms and Conditions -->
             <CheckBox
@@ -219,7 +229,7 @@
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp"
                 android:layout_marginTop="16dp" 
-                android:buttonTint="@color/login_button"/>
+                app:buttonTint="@color/checkbox_tint"/>
 
             <!-- Register Button -->
             <Button

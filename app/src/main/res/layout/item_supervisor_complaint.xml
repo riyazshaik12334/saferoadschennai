@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Complaint Image -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivComplaintImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_login_gradient" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Title and Status Pill -->
+        <TextView
+            android:id="@+id/tvComplaintTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Pothole Issue"
+            android:textColor="#102027"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cardImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_marginTop="6dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#FFF9C4"
+            app:layout_constraintStart_toStartOf="@id/tvComplaintTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvComplaintTitle">
+            <TextView
+                android:id="@+id/tvStatusText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingHorizontal="10dp"
+                android:text="IN PROGRESS"
+                android:textColor="#FBC02D"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Location/Zone -->
+        <LinearLayout
+            android:id="@+id/layoutZone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvComplaintTitle"
+            app:layout_constraintTop_toBottomOf="@id/cardStatus">
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_location"
+                app:tint="#90A4AE" />
+            <TextView
+                android:id="@+id/tvComplaintZone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="Adyar Zone"
+                android:textColor="#90A4AE"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Reporter info -->
+        <LinearLayout
+            android:id="@+id/layoutReporter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvComplaintTitle"
+            app:layout_constraintTop_toBottomOf="@id/layoutZone">
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_person"
+                app:tint="#90A4AE" />
+            <TextView
+                android:id="@+id/tvReporterInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="Reporter: Vijay"
+                android:textColor="#90A4AE"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutMobile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvComplaintTitle"
+            app:layout_constraintTop_toBottomOf="@id/layoutReporter">
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_phone"
+                app:tint="#90A4AE" />
+            <TextView
+                android:id="@+id/tvReporterMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="9876543210"
+                android:textColor="#90A4AE"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- SRC ID and Date -->
+        <TextView
+            android:id="@+id/tvComplaintId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="SRC: 12345"
+            android:textColor="#B0BEC5"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@id/tvComplaintTitle"
+            app:layout_constraintTop_toBottomOf="@id/layoutMobile" />
+
+        <TextView
+            android:id="@+id/tvComplaintDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25 Mar 2024"
+            android:textColor="#B0BEC5"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvComplaintId"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvComplaintId" />
+
+        <!-- Simple Divider -->
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="#EEEEEE"
+            app:layout_constraintTop_toBottomOf="@id/tvComplaintId" />
+
+        <!-- Actions -->
+        <LinearLayout
+            android:id="@+id/layoutActions"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/divider">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDirections"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="DIRECTIONS"
+                android:textColor="#1A237E"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:icon="@drawable/ic_location"
+                app:iconSize="14dp"
+                app:iconTint="#1A237E" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="24dp"
+                android:background="#EEEEEE"
+                android:layout_gravity="center_vertical" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmitProof"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="SUBMIT PROOF"
+                android:textColor="#1A237E"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:icon="@drawable/ic_camera"
+                app:iconSize="14dp"
+                app:iconTint="#1A237E" />
+        </LinearLayout>
+
+        <!-- Submitted Proof Section -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutProof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="4dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/layoutActions">
+
+            <TextView
+                android:id="@+id/tvProofLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submitted Proof"
+                android:textColor="#102027"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvProofTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text=""
+                android:textColor="#90A4AE"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@id/tvProofLabel"
+                app:layout_constraintStart_toEndOf="@id/tvProofLabel"
+                app:layout_constraintTop_toTopOf="@id/tvProofLabel" />
+
+            <TextView
+                android:id="@+id/tvAuthorityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text=""
+                android:textColor="#546E7A"
+                android:textSize="10sp"
+                android:textStyle="italic"
+                app:layout_constraintTop_toBottomOf="@id/tvProofLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="gone"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardProof"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAuthorityName">
+
+                <ImageView
+                    android:id="@+id/ivProofImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_login_gradient" />
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/btnDeleteProof"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/bg_circle_white"
+                android:elevation="4dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_delete"
+                app:layout_constraintEnd_toEndOf="@id/cardProof"
+                app:layout_constraintTop_toTopOf="@id/cardProof"
+                app:tint="#D32F2F" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Feedback Section (Visible to Supervisor after resolution) -->
+        <LinearLayout
+            android:id="@+id/layoutFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="#FFFDE7"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/layoutProof"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp">
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Citizen Feedback"
+                    android:textColor="#F57F17"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentStart="true"/>
+                
+                <TextView
+                    android:id="@+id/tvRatingStars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="★★★★★"
+                    android:textColor="#FBC02D"
+                    android:textSize="12sp"
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvFeedbackDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Great work! The road is now safe."
+                android:textColor="#455A64"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

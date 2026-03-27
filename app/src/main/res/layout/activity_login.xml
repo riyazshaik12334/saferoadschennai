@@ -83,7 +83,8 @@
                         android:gravity="center"
                         android:text="@string/citizen_login"
                         android:textColor="@color/tab_text_selected"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tabAuthority"
@@ -94,7 +95,20 @@
                         android:gravity="center"
                         android:text="@string/authority_login"
                         android:textColor="@color/tab_text_unselected"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                        
+                    <TextView
+                        android:id="@+id/tabSupervisor"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:text="Supervisor"
+                        android:textColor="@color/tab_text_unselected"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <TextView
@@ -128,19 +142,35 @@
                     android:textColor="@color/text_secondary"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/etPassword"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_input_field"
-                    android:drawableStart="@android:drawable/ic_lock_idle_lock"
-                    android:drawablePadding="12dp"
-                    android:drawableTint="@color/text_secondary"
-                    android:inputType="textPassword"
-                    android:paddingHorizontal="12dp"
-                    android:textColor="@color/text_primary"
-                    android:textColorHint="@color/text_hint" />
+                    android:background="@drawable/bg_input_field">
+
+                    <EditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@id/ivTogglePassword"
+                        android:background="@null"
+                        android:drawableStart="@android:drawable/ic_lock_idle_lock"
+                        android:drawablePadding="12dp"
+                        android:drawableTint="@color/text_secondary"
+                        android:inputType="textPassword"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_hint" />
+
+                    <ImageView
+                        android:id="@+id/ivTogglePassword"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:padding="12dp"
+                        android:src="@android:drawable/ic_menu_view"
+                        android:tint="@color/text_secondary" />
+                </RelativeLayout>
 
                 <!-- Options -->
                 <LinearLayout
@@ -155,7 +185,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/remember_me"
-                        android:buttonTint="@color/text_secondary"
+                        app:buttonTint="@color/checkbox_tint"
                         android:textColor="@color/text_secondary" />
 
                     <View

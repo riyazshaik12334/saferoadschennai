@@ -15,8 +15,14 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+
 import java.util.ArrayList;
 import java.util.List;
+import com.simats.saferoadschennaisrc.network.RetrofitClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AuthorityComplaintsActivity extends AppCompatActivity {
 
@@ -26,6 +32,7 @@ public class AuthorityComplaintsActivity extends AppCompatActivity {
     private TextView tvItemCount, chipAll, chipPending, chipInProgress, chipResolved;
     private LinearLayout emptyState;
     private EditText etSearch;
+    private androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +48,58 @@ public class AuthorityComplaintsActivity extends AppCompatActivity {
         setupBottomNavigation();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshComplaints();
+    }
+
+    private void refreshComplaints() {
+        if (swipeRefresh != null)
+            swipeRefresh.setRefreshing(true);
+        RetrofitClient.getApiService().getComplaints().enqueue(new Callback<List<ComplaintModel>>() {
+            @Override
+            public void onResponse(Call<List<ComplaintModel>> call, Response<List<ComplaintModel>> response) {
+                if (swipeRefresh != null)
+                    swipeRefresh.setRefreshing(false);
+                if (response.isSuccessful() && response.body() != null) {
+                    allComplaints = response.body();
+                    ComplaintStore.getInstance().getComplaints().clear();
+                    ComplaintStore.getInstance().getComplaints().addAll(allComplaints);
+
+                    if (adapter != null) {
+                        adapter.setList(allComplaints);
+                        adapter.filter(currentFilter);
+                        updateItemCount(adapter.getItemCount());
+                    }
+                }
+                checkEmptyState();
+            }
+
+            @Override
+            public void onFailure(Call<List<ComplaintModel>> call, Throwable t) {
+                if (swipeRefresh != null)
+                    swipeRefresh.setRefreshing(false);
+                allComplaints = ComplaintStore.getInstance().getComplaints();
+                if (adapter != null) {
+                    adapter.setList(allComplaints);
+                    adapter.filter(currentFilter);
+                    updateItemCount(adapter.getItemCount());
+                }
+                checkEmptyState();
+            }
+        });
+    }
+
     private void initializeViews() {
         rvComplaints = findViewById(R.id.rvComplaints);
         tvItemCount = findViewById(R.id.tvItemCount);
         emptyState = findViewById(R.id.emptyState);
         etSearch = findViewById(R.id.etSearch);
+        swipeRefresh = findViewById(R.id.swipeRefresh);
+
+        swipeRefresh.setOnRefreshListener(this::refreshComplaints);
+        swipeRefresh.setColorSchemeColors(ContextCompat.getColor(this, R.color.primary));
 
         chipAll = findViewById(R.id.chipAll);
         chipPending = findViewById(R.id.chipPending);
@@ -56,10 +110,7 @@ public class AuthorityComplaintsActivity extends AppCompatActivity {
     private String currentFilter = "All";
 
     private void setupDummyData() {
-        allComplaints = new ArrayList<>();
-        // Adding an example case as requested
-        allComplaints.add(new ComplaintModel("RPT-2023-901", "Mount Road, Near Metro", "Zone 10", "Priya S.", "Pending",
-                "13 Feb 2026", "High", R.drawable.bg_login_gradient));
+        allComplaints = ComplaintStore.getInstance().getComplaints();
     }
 
     private void setupRecyclerView() {
@@ -71,37 +122,44 @@ public class AuthorityComplaintsActivity extends AppCompatActivity {
         updateItemCount(allComplaints.size());
     }
 
-    private void showStatusUpdateMenu(ComplaintModel complaint) {
-        android.widget.PopupMenu popup = new android.widget.PopupMenu(this,
-                rvComplaints.findViewHolderForAdapterPosition(allComplaints.indexOf(complaint)).itemView);
-        popup.getMenu().add("Pending");
-        popup.getMenu().add("In Progress");
-        popup.getMenu().add("Resolved");
+    public void showStatusUpdateMenu(ComplaintModel complaint) {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        View view = getLayoutInflater().inflate(R.layout.layout_status_bottom_sheet, null);
 
-        popup.setOnMenuItemClickListener(item -> {
-            String newStatus = item.getTitle().toString();
-            // Update the status in our list
-            int index = allComplaints.indexOf(complaint);
-            if (index != -1) {
-                allComplaints.set(index, new ComplaintModel(
-                        complaint.getId(),
-                        complaint.getTitle(),
-                        complaint.getZone(),
-                        complaint.getReporter(),
-                        newStatus,
-                        complaint.getDate(),
-                        complaint.getPriority(),
-                        complaint.getImageResId()));
-
-                // Refresh the current filter
-                adapter.setList(allComplaints);
-                adapter.filter(currentFilter);
-                checkEmptyState();
-                Toast.makeText(this, "Status updated to " + newStatus, Toast.LENGTH_SHORT).show();
-            }
-            return true;
+        view.findViewById(R.id.btnStatusPending).setOnClickListener(v -> {
+            updateStatus(complaint, "Pending");
+            bottomSheetDialog.dismiss();
         });
-        popup.show();
+
+        view.findViewById(R.id.btnStatusInProgress).setOnClickListener(v -> {
+            updateStatus(complaint, "In Progress");
+            bottomSheetDialog.dismiss();
+        });
+
+        view.findViewById(R.id.btnStatusResolved).setOnClickListener(v -> {
+            updateStatus(complaint, "Resolved");
+            bottomSheetDialog.dismiss();
+        });
+
+        bottomSheetDialog.setContentView(view);
+        bottomSheetDialog.show();
+    }
+
+    private void updateStatus(ComplaintModel complaint, String newStatus) {
+        // Update the status in storage
+        ComplaintStore.getInstance().updateStatus(complaint.getId(), newStatus, new Callback<ComplaintModel>() {
+            @Override
+            public void onResponse(Call<ComplaintModel> call, Response<ComplaintModel> response) {
+                refreshComplaints();
+                Toast.makeText(AuthorityComplaintsActivity.this, "Status updated to " + newStatus, Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            @Override
+            public void onFailure(Call<ComplaintModel> call, Throwable t) {
+                Toast.makeText(AuthorityComplaintsActivity.this, "Failed to update status", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setupSearch() {

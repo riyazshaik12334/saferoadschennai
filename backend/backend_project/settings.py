@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'DJANGO_SECRET_KEY'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-change-me')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -161,6 +162,6 @@ EMAIL_HOST = 'smtp-relay.brevo.com'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 # Removed EMAIL_USE_TLS
-EMAIL_HOST_USER = 'your_email@example.com'
-EMAIL_HOST_PASSWORD = 'YOUR_BREVO_KEY_1'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'your_email_here')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'your_brevo_api_key_here')
 DEFAULT_FROM_EMAIL = 'Safe Roads Chennai <chennaisaferoads@gmail.com>'

@@ -50,6 +50,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".PremiumActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".ForgotPasswordActivity"

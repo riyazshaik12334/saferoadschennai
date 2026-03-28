@@ -231,7 +231,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:gravity="center"
-                android:text="Safe Roads Chennai v1.0.2\n© 2026 Greater Chennai Corporation"
+                android:text="Safe Roads Chennai v1.0.2\n© 2026 For educational purpose only"
                 android:textColor="#B0BEC5"
                 android:textSize="11sp"
                 android:lineSpacingExtra="4dp" />

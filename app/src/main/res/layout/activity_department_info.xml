@@ -20,8 +20,8 @@
 
         <FrameLayout
             android:id="@+id/logoCircle"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/bg_circle_white"
             android:backgroundTint="#303F9F"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,8 +121,8 @@
                     android:padding="24dp">
 
                     <FrameLayout
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
                         android:background="@drawable/bg_circle_white">
 
                         <ImageView
@@ -137,7 +137,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Greater Chennai Corporation (GCC)"
+                        android:text="For educational purpose only"
                         android:textColor="#102027"
                         android:textSize="18sp"
                         android:textStyle="bold"

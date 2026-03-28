@@ -157,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Citizens must register an account to submit reports. You must provide a valid mobile number and other required details. The Greater Chennai Corporation reserves the right to suspend or terminate accounts that violate these terms."
+                android:text="Citizens must register an account to submit reports. You must provide a valid mobile number and other required details. Safe Roads Chennai reserves the right to suspend or terminate accounts that violate these terms."
                 android:textColor="#546E7A"
                 android:textSize="14sp"
                 android:lineSpacingExtra="4dp"/>

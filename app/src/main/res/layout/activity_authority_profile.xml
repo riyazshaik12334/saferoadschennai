@@ -34,7 +34,7 @@
                     android:id="@+id/logoCircle"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/bg_circle_white"
+                    android:background="@drawable/bg_rounded_square_white"
                     android:backgroundTint="#303F9F"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -114,7 +114,7 @@
                     <FrameLayout
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:background="@drawable/bg_circle_white"
+                        android:background="@drawable/bg_rounded_square_white"
                         android:backgroundTint="#1A237E">
 
                         <TextView

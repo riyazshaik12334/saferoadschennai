@@ -35,6 +35,8 @@
                     android:id="@+id/headerLogo"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:background="@drawable/bg_rounded_square_white"
+                    android:padding="6dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -112,7 +114,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:src="@drawable/ic_person"
-                            android:background="@drawable/bg_circle_white"
+                            android:background="@drawable/bg_rounded_square_white"
                             android:backgroundTint="#F5F5F5"
                             android:padding="16dp"
                             app:tint="#9E9E9E"
@@ -125,7 +127,7 @@
                             android:layout_height="24dp"
                             android:src="@drawable/ic_check_circle"
                             app:tint="#00C853"
-                            android:background="@drawable/bg_circle_white"
+                            android:background="@drawable/bg_rounded_square_white"
                             android:padding="2dp"
                             app:layout_constraintBottom_toBottomOf="@id/imgAvatar"
                             app:layout_constraintEnd_toEndOf="@id/imgAvatar"/>
@@ -271,7 +273,7 @@
                             android:layout_height="40dp"
                             android:src="@drawable/ic_person"
                             android:padding="10dp"
-                            android:background="@drawable/bg_circle_white"
+                            android:background="@drawable/bg_rounded_square_white"
                             android:backgroundTint="#E8EAF6"
                             app:tint="#3F51B5"/>
 
@@ -308,7 +310,7 @@
                             android:layout_height="40dp"
                             android:src="@drawable/ic_notifications"
                             android:padding="10dp"
-                            android:background="@drawable/bg_circle_white"
+                            android:background="@drawable/bg_rounded_square_white"
                             android:backgroundTint="#E8EAF6"
                             app:tint="#3F51B5"/>
 
@@ -345,7 +347,7 @@
                             android:layout_height="40dp"
                             android:src="@drawable/ic_settings"
                             android:padding="10dp"
-                            android:background="@drawable/bg_circle_white"
+                            android:background="@drawable/bg_rounded_square_white"
                             android:backgroundTint="#E8EAF6"
                             app:tint="#3F51B5"/>
 
@@ -382,7 +384,7 @@
                             android:layout_height="40dp"
                             android:src="@drawable/ic_help"
                             android:padding="10dp"
-                            android:background="@drawable/bg_circle_white"
+                            android:background="@drawable/bg_rounded_square_white"
                             android:backgroundTint="#E8EAF6"
                             app:tint="#3F51B5"/>
 
@@ -419,7 +421,7 @@
                             android:layout_height="40dp"
                             android:src="@drawable/ic_security"
                             android:padding="10dp"
-                            android:background="@drawable/bg_circle_white"
+                            android:background="@drawable/bg_rounded_square_white"
                             android:backgroundTint="#E8EAF6"
                             app:tint="#3F51B5"/>
 
@@ -456,7 +458,7 @@
                             android:layout_height="40dp"
                             android:src="@drawable/ic_description"
                             android:padding="10dp"
-                            android:background="@drawable/bg_circle_white"
+                            android:background="@drawable/bg_rounded_square_white"
                             android:backgroundTint="#E8EAF6"
                             app:tint="#3F51B5"/>
 
@@ -513,7 +515,7 @@
                             android:layout_height="40dp"
                             android:src="@drawable/ic_description"
                             android:padding="10dp"
-                            android:background="@drawable/bg_circle_white"
+                            android:background="@drawable/bg_rounded_square_white"
                             android:backgroundTint="#FFEBEE"
                             app:tint="#E57373"/>
 

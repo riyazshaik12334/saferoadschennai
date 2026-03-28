@@ -28,23 +28,31 @@
                 android:paddingBottom="48dp"
                 android:paddingHorizontal="24dp">
 
-                <ImageView
-                    android:id="@+id/ivHeaderLogo"
+                <FrameLayout
+                    android:id="@+id/headerLogoContainer"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:src="@drawable/app_logo"
-                    android:scaleType="fitCenter"
+                    android:background="@drawable/bg_rounded_square_white"
+                    android:padding="6dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivHeaderLogo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/app_logo"
+                        android:scaleType="fitCenter" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:orientation="vertical"
-                    app:layout_constraintStart_toEndOf="@id/ivHeaderLogo"
-                    app:layout_constraintTop_toTopOf="@id/ivHeaderLogo"
-                    app:layout_constraintBottom_toBottomOf="@id/ivHeaderLogo">
+                    app:layout_constraintStart_toEndOf="@id/headerLogoContainer"
+                    app:layout_constraintTop_toTopOf="@id/headerLogoContainer"
+                    app:layout_constraintBottom_toBottomOf="@id/headerLogoContainer">
 
                     <TextView
                         android:layout_width="wrap_content"

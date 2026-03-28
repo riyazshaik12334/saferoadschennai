@@ -208,7 +208,7 @@
                             android:layout_height="32dp"
                             android:src="@drawable/ic_phone"
                             android:padding="6dp"
-                            android:background="@drawable/bg_circle_white"
+                            android:background="@drawable/bg_rounded_square_white"
                             app:tint="#1A237E"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -248,7 +248,7 @@
                             android:layout_height="32dp"
                             android:src="@drawable/ic_phone"
                             android:padding="6dp"
-                            android:background="@drawable/bg_circle_white"
+                            android:background="@drawable/bg_rounded_square_white"
                             app:tint="#1A237E"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -287,7 +287,7 @@
                             android:layout_height="32dp"
                             android:src="@drawable/ic_help"
                             android:padding="6dp"
-                            android:background="@drawable/bg_circle_white"
+                            android:background="@drawable/bg_rounded_square_white"
                             app:tint="#4CAF50"/>
                         <LinearLayout
                             android:layout_width="wrap_content"

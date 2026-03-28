@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
@@ -27,9 +28,9 @@ public class PremiumActivity extends AppCompatActivity {
         btnUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // In a real app, this would start the payment flow
-                // For now, it just goes to login after "upgrading"
-                navigateToLogin();
+                Toast.makeText(PremiumActivity.this, "Opening Payment Gateway...", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(PremiumActivity.this, PaymentActivity.class);
+                startActivity(intent);
             }
         });
     }

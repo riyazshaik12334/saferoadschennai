@@ -9,14 +9,15 @@
     <style>
         body {
             margin: 0;
-            padding: 0;
-            height: 100vh;
+            padding: 20px 0;
+            min-height: 100vh;
             background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Inter', sans-serif;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             color: white;
         }
 
@@ -59,21 +60,23 @@
             margin-bottom: 20px;
         }
 
-        .logo-circle {
-            width: 80px;
-            height: 80px;
+        .logo-square {
+            width: 100px;
+            height: 100px;
             background: white;
-            border-radius: 50%;
+            border-radius: 16px;
             display: inline-flex;
             justify-content: center;
             align-items: center;
             margin-bottom: 10px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
         }
 
-        .logo-circle img {
-            width: 60px;
-            height: 60px;
+        .logo-square img {
+            width: 80px;
+            height: 80px;
             object-fit: contain;
         }
 
@@ -150,6 +153,9 @@
             cursor: pointer;
             transition: 0.3s;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+            margin-top: 10px;
         }
 
         .upgrade-btn:hover {
@@ -166,6 +172,7 @@
             background: #ffd700;
             border-radius: 2px;
             animation: fall 3s linear infinite;
+            z-index: 1;
         }
 
         @keyframes fall {
@@ -178,7 +185,7 @@
         <a href="login.html" class="skip-btn">Skip <i class="fas fa-chevron-right"></i></a>
         
         <div class="logo-section">
-            <div class="logo-circle">
+            <div class="logo-square">
                 <img src="assets/logo.png" alt="Logo">
             </div>
             <div class="app-name">Safe Roads Chennai</div>
@@ -194,7 +201,7 @@
             <li class="feature-item"><i class="fas fa-check-circle"></i> Priority Support</li>
         </ul>
 
-        <button class="upgrade-btn" onclick="location.href='login.html'">Upgrade for ₹99</button>
+        <button class="upgrade-btn" onclick="location.href='payment.html'">Upgrade for ₹99</button>
     </div>
 
     <!-- Background Decoration -->

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Payment Method - Safe Roads Chennai</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #FAFAFA;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            flex: 1;
+            text-align: center;
+        }
+
+        .close-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        .content {
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .logo-square {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 12px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-square img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .app-name {
+            color: var(--primary-blue);
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #666;
+            margin: 20px 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .payment-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 15px;
+        }
+
+        .option-item {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #F0F0F0;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .option-item:last-child {
+            border-bottom: none;
+        }
+
+        .option-item.selected {
+            background-color: #E8EAF6;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .option-item i.fa-google-pay { color: #4285F4; }
+        .option-item i.fa-mobile-alt { color: #5F259F; }
+        .option-item i.fa-wallet { color: #00BAF2; }
+
+        .wallet-box.selected {
+            background-color: #E8EAF6;
+            border: 2px solid var(--primary-blue);
+        }
+
+        .pay-btn:disabled {
+            background-color: #9E9E9E;
+            cursor: not-allowed;
+        }
+
+        .wallet-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .wallet-box {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+        }
+
+        .footer {
+            padding: 20px;
+            background: white;
+            position: sticky;
+            bottom: 0;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .pay-btn {
+            background-color: #2E7D32;
+            color: white;
+            border: none;
+            width: 100%;
+            max-width: 460px;
+            padding: 16px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .pay-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="premium.html" class="close-btn"><i class="fas fa-times"></i></a>
+        <h1>Select Payment Method</h1>
+        <div style="width: 24px;"></div>
+    </div>
+
+    <div class="content">
+        <div class="logo-section">
+            <div class="logo-square">
+                <img src="assets/logo.png" alt="Logo">
+            </div>
+            <div class="app-name">Safe Roads Chennai</div>
+        </div>
+
+        <div class="section-title">UPI</div>
+        <div class="payment-card">
+            <div class="option-item"><i class="fab fa-google-pay"></i> Google Pay</div>
+            <div class="option-item"><i class="fas fa-mobile-alt"></i> PhonePe</div>
+            <div class="option-item"><i class="fas fa-wallet"></i> Paytm</div>
+            <div class="input-box">
+                <input type="text" placeholder="Enter UPI ID">
+            </div>
+        </div>
+
+        <div class="section-title">Cards</div>
+        <div class="payment-card">
+            <div class="input-box">
+                <input type="text" placeholder="Card Number">
+                <div class="card-inputs">
+                    <input type="text" placeholder="MM / YY">
+                    <input type="password" placeholder="CVV">
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">Wallets</div>
+        <div class="wallet-row">
+            <div class="wallet-box">Amazon Pay</div>
+            <div class="wallet-box">Paytm Wallet</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button id="payBtn" class="pay-btn" disabled>Select a Method</button>
+    </div>
+
+    <script>
+        let selectedMethod = "";
+        const payBtn = document.getElementById('payBtn');
+        const options = document.querySelectorAll('.option-item, .wallet-box');
+
+        options.forEach(opt => {
+            opt.addEventListener('click', () => {
+                options.forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+                selectedMethod = opt.innerText.trim();
+                payBtn.disabled = false;
+                payBtn.innerText = `Pay ₹99 via ${selectedMethod}`;
+            });
+        });
+
+        payBtn.addEventListener('click', () => {
+            alert(`Payment Successful via ${selectedMethod}! Redirecting...`);
+            location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

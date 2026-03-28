@@ -31,10 +31,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <FrameLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/bg_circle_white"
-            android:padding="8dp">
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_rounded_square_white"
+            android:elevation="8dp"
+            android:padding="12dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -85,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:background="@drawable/bg_pill_gray"
-        android:backgroundTint="#4DFFFFFF"
+        app:backgroundTint="#4DFFFFFF"
         android:paddingHorizontal="16dp"
         android:paddingVertical="6dp"
         android:text="Limited Time Offer"
@@ -182,7 +183,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/white"
         android:text="Upgrade for ₹99"
         android:textAllCaps="false"

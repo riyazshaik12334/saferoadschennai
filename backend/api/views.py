@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.utils import timezone
+from django.conf import settings
 import random
 import datetime
 
@@ -301,7 +302,7 @@ def send_otp(request):
     # Send Email
     subject = 'Safe Roads Chennai - Password Reset OTP'
     message = f'Your OTP for password reset is: {otp_code}. It is valid for 5 minutes.'
-    from_email = 'Safe Roads Chennai <chennaisaferoads@gmail.com>'
+    from_email = settings.DEFAULT_FROM_EMAIL
     
     try:
         print(f"DEBUG: Attempting to send email to {recipient_email}...")

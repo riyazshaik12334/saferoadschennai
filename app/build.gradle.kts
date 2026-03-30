@@ -14,6 +14,21 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Load ANDROID_SECRET_KEY from .env
+        val envFile = rootProject.file(".env")
+        val androidSecretKey = if (envFile.exists()) {
+            val properties = java.util.Properties()
+            envFile.inputStream().use { properties.load(it) }
+            properties.getProperty("ANDROID_SECRET_KEY") ?: "DEFAULT_RECOVERY_KEY_2026"
+        } else {
+            "DEFAULT_RECOVERY_KEY_2026"
+        }
+        buildConfigField("String", "ANDROID_SECRET_KEY", "\"$androidSecretKey\"")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {

@@ -15,7 +15,7 @@ public class SecurityUtils {
 
     private static final String ALGORITHM = "AES/CBC/PKCS5Padding";
     // 32-byte key for AES-256
-    private static final String SECRET_KEY = "YOUR_ANDROID_SECRET_KEY_HERE";
+    private static final String SECRET_KEY = BuildConfig.ANDROID_SECRET_KEY;
     // 16-byte IV for CBC
     private static final String INIT_VECTOR = "RandomIVVector12";
 
